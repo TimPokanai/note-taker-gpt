@@ -5,8 +5,7 @@ import os
 
 import sounddevice as sd
 import soundfile as sf
-from scipy.io.wavfile import write
-from transcribe_audio import transcribe_audio
+from transcribe_audio import transcribe_chunks
 
 MAX_DURATION = 60 * 50 # We can record sessions for up to 50 minutes
 SAMPLE_RATE = 16000
@@ -16,15 +15,6 @@ WAV_OUTPUT = "lecture.wav"
 recording = True
 
 audio_queue = queue.Queue()
-
-# def record_audio(filename="lecture.wav", duration=30, fs=16000):
-#     print("Recording...")
-
-#     audio = sd.rec(int(duration * fs), samplerate=fs, channels=1, dtype="int16")
-#     sd.wait()
-#     write(filename, fs, audio)
-
-#     print(f"Saved to {filename}")
 
 def audio_callback(indata, frames, time, status):
     audio_queue.put(indata.copy())
@@ -57,7 +47,7 @@ def start_recording():
     recording_thread.join()
 
 def process():
-    transcript = transcribe_audio(WAV_OUTPUT)
+    transcript = transcribe_chunks(WAV_OUTPUT)
     print("Transcription complete.")
     print(transcript)
 
