@@ -5,3 +5,4 @@ pandas==2.0.1
 scipy==1.16.0
 sounddevice==0.5.2
 soundfile==0.13.1
+torchaudio==2.0.2
