@@ -1,3 +1,4 @@
 .env
 __pycache__
 lecture.wav
+.github/workflows/deploy.yml

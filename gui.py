@@ -7,6 +7,7 @@ import numpy as np
 
 from record_audio import start_recording, stop_recording, WAV_OUTPUT
 from transcribe_audio import transcribe_chunks
+from summarize import summarize_full_transcript
 
 class NoteTakerApp:
     def __init__(self, root):
@@ -37,10 +38,11 @@ class NoteTakerApp:
 
     def transcribe(self):
         transcript = transcribe_chunks(WAV_OUTPUT)
+        summary = summarize_full_transcript(transcript)
         def update_gui():
             self.textbox.insert(tk.END, "Transcription done...\n")
             self.textbox.insert(tk.END, "\========== TRANSCRIBED NOTES ==========\n\n")
-            self.textbox.insert(tk.END, transcript)
+            self.textbox.insert(tk.END, summary)
             self.textbox.insert(tk.END, "\nDone.\n")
         self.root.after(0, update_gui)
 
