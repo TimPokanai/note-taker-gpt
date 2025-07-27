@@ -26,3 +26,11 @@ jobs:
 
       - name: Syntax Check (Compile Bytecode)
         run: python -m compileall .
+
+      - name: Start background process
+        run: |
+          python gui.py &
+          sleep 5
+
+      - name: Kill background process
+        run: pkill -f gui.py
