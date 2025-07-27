@@ -36,6 +36,8 @@ jobs:
         run: |
           python gui.py &
           sleep 5
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY  }}
 
       - name: Kill background process
         run: pkill -f gui.py
